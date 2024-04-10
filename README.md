@@ -6,7 +6,7 @@ A starting point for Neovim that is:
 
 * Small
 * Single-file
-* Completely Documented
+* nvim.bcCompletely Documented
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
