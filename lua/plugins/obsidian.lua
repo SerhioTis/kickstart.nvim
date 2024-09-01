@@ -11,13 +11,6 @@ return {
   --   "BufReadPre path/to/my-vault/*.md",
   --   "BufNewFile path/to/my-vault/*.md",
   -- },
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'hrsh7th/nvim-cmp',
-    'nvim-telescope/telescope.nvim',
-    'nvim-treesitter/nvim-treesitter',
-    'pomo.nvim',
-  },
   opts = {
     workspaces = {
       {
@@ -43,5 +36,6 @@ return {
         end,
       },
     },
+    follow_url_func = vim.ui.open,
   },
 }

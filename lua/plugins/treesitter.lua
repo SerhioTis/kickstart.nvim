@@ -39,6 +39,7 @@ return { -- Highlight, edit, and navigate code
 
       'yaml',
       'toml',
+      'nix',
     },
     auto_install = true,
     highlight = {
@@ -48,8 +49,6 @@ return { -- Highlight, edit, and navigate code
     indent = { enable = true, disable = { 'ruby' } },
   },
   config = function(_, opts)
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup(opts)
 

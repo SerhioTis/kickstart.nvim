@@ -1,25 +1,28 @@
 return {
-  { 'ThePrimeagen/git-worktree.nvim' },
+  'ThePrimeagen/git-worktree.nvim',
+  'tpope/vim-fugitive',
+
   {
     'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'nvim-tree/nvim-web-devicons',
+    opts = {
+      enable_builtin = false,
     },
-    config = function()
-      require('octo').setup()
-    end,
+    keys = {
+      { '<leader>O', '<cmd>Octo<cr>', desc = 'Octo' },
+    },
   },
   {
-    'tpope/vim-fugitive',
+    'NeogitOrg/neogit',
+    dependencies = {
+      'sindrets/diffview.nvim',
+    },
+    opts = {},
   },
   {
     'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end,
+
     opts = {
+      current_line_blame = true,
       signs = {
         add = { text = '+' },
         change = { text = '~' },

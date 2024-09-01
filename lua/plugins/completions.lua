@@ -19,6 +19,29 @@ return { -- Autocompletion
         },
       },
     },
+    {
+      'windwp/nvim-autopairs',
+      event = 'InsertEnter',
+      config = function()
+        require('nvim-autopairs').setup {
+          check_ts = true,                      -- enable treesitter
+          ts_config = {
+            lua = { 'string' },                 -- don't add pairs in lua string treesitter nodes
+            javascript = { 'template_string' }, -- don't add pairs in javscript template_string treesitter nodes
+            java = false,                       -- don't check treesitter on java
+          },
+        }
+
+        -- import nvim-autopairs completion functionality
+        local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+
+        -- import nvim-cmp plugin (completions plugin)
+        local cmp = require 'cmp'
+
+        -- make autopairs and completion work together
+        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+      end,
+    },
     'saadparwaiz1/cmp_luasnip',
 
     'onsails/lspkind.nvim',
@@ -31,7 +54,6 @@ return { -- Autocompletion
     -- See `:help cmp`
     local cmp = require 'cmp'
     local lspkind = require 'lspkind'
-    lspkind.init {}
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
 
@@ -42,6 +64,23 @@ return { -- Autocompletion
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
+
+      formatting = {
+        format = lspkind.cmp_format {
+          mode = 'symbol_text', -- show only symbol annotations
+          maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          -- can also be a function to dynamically calculate max width such as
+          -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+          ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          -- before = function(entry, vim_item)
+          --   return vim_item
+          -- end,
+        },
+      },
 
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`

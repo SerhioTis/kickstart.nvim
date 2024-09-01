@@ -1,8 +1,3 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-vim.g.have_nerd_font = true
-
 local keymap = vim.keymap
 
 --  See `:help vim.keymap.set()`
@@ -65,5 +60,11 @@ keymap.set('i', 'jk', '<ESC>')
 
 keymap.set('n', '<C-a>', 'ggVG')
 
-vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+-- better helh-screen move
+keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
+keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+
+keymap.set('n', 'n', 'nzzzv', { noremap = true, silent = true })
+keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true })
+
+keymap.set('x', '<leader>p', '"_dP', { desc = 'paste without overwriting register' })
